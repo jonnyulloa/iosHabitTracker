@@ -30,6 +30,10 @@ jobs:
           file_to_build=`echo $file_to_build | awk '{$1=$1;print}'`
           xcodebuild clean build analyze -scheme "$scheme" -"$filetype_parameter" "$file_to_build" -destination 'platform=iOS Simulator,name=iPhone 14,OS=18.1' | xcpretty && exit ${PIPESTATUS[0]}
 
-      - name: Run on simulator
+      - name: Boot simulator
+        run: xcrun simctl boot "iPhone 14"
+
+      - name: Run on simulator (headless)
         run: |
-          xcodebuild test -scheme "habit tracker" -destination 'platform=iOS Simulator,name=iPhone 14,OS=18.1'
+          xcodebuild test -scheme "habit tracker" -destination 'platform=iOS Simulator,name=iPhone 14,OS=18.1' -destination-timeout 30
+        timeout-minutes: 5
