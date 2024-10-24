@@ -32,8 +32,6 @@ struct NewHabit: View {
             }
         }
     }
-
-    // Helper to create a number field with validation
     private func numberField(_ label: String, text: Binding<String>) -> some View {
         TextField(label, text: Binding(
             get: { text.wrappedValue },

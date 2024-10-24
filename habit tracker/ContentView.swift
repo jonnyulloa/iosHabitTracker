@@ -26,7 +26,6 @@ struct ContentView: View {
             .navigationBarHidden(true)
         }
     }
-
     private var habitList: some View {
         List {
             ForEach(habitStore.habits) { habit in
@@ -60,6 +59,17 @@ struct ContentView: View {
                     }
                     Text("\(habit.description)")
                         .font(.subheadline)
+                    VStack {
+                        HStack {
+                            Spacer()
+                            NavigationLink(destination: NewHabit(habitStore: habitStore)) {
+                                Text("Add")
+                                
+                            }
+                            .padding()
+                        }
+                        Spacer()
+                    }
                     VStack {
                         HStack {
                             Spacer()
